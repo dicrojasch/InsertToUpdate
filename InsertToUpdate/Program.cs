@@ -32,13 +32,32 @@ namespace insertToUpdate
             
             return okConvertion;
         }
+
+        String transform(String text)
+        {
+            // Delete comments
+            String commentPattern = @"\/\*+[\w \n]*\*\/";
+            Regex rgx = new Regex(commentPattern);
+            text = rgx.Replace(text, "");
+
+            commentPattern = @"\/\/.*";
+            rgx = new Regex(commentPattern);
+            text = rgx.Replace(text, "");
+
+            return text;
+        }
+
         static void Main()
         {
             InsertToUpdate a = new InsertToUpdate();
             String path = @"D:\Downloads";
 
+            
+
             String text = a.readFile( path + @"\test.sql");
-            a.saveFile(path + @"\test1.sql", text);
+            String textTransform = a.transform(text);
+            a.saveFile(path + @"\test1.sql", textTransform);
+
 
 
             text = "One car red car blue car";
