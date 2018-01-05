@@ -44,6 +44,14 @@ namespace insertToUpdate
             rgx = new Regex(commentPattern);
             text = rgx.Replace(text, "");
 
+            commentPattern = @"\t|\n|\r";
+            rgx = new Regex(commentPattern);
+            text = rgx.Replace(text, ".");
+
+            commentPattern = @"INSERT";
+            rgx = new Regex(commentPattern);
+            text = rgx.Replace(text, "\nINSERT");
+
             return text;
         }
 
