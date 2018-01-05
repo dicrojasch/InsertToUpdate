@@ -10,9 +10,38 @@ namespace insertToUpdate
 {
     class InsertToUpdate
     {
+
+        public String readFile( String file )
+        {
+            String text = System.IO.File.ReadAllText( file );            
+            return text;
+        }
+
+        public Boolean saveFile( String file, String text )
+        {
+            Boolean okConvertion = false;
+            try
+            {
+                System.IO.File.WriteAllText(file, text);
+                okConvertion = true;
+            }
+            catch
+            {
+                okConvertion = false;
+            }
+            
+            return okConvertion;
+        }
         static void Main()
         {
-            string text = "One car red car blue car";
+            InsertToUpdate a = new InsertToUpdate();
+            String path = @"D:\Downloads";
+
+            String text = a.readFile( path + @"\test.sql");
+            a.saveFile(path + @"\test1.sql", text);
+
+
+            text = "One car red car blue car";
             string pat = @"(\w+)\s+(car)";
 
             // Instantiate the regular expression object.
